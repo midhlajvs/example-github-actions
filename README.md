@@ -1,4 +1,4 @@
-# GitHub Actions Example
+# GitHub Actions Example PHP
 
 This is full project structure example of article **[Automate that! 👊 A practical guide to GitHub Actions: build & deploy a static 11ty website to remote virtual server after push](https://dev.to/koddr/automate-that-a-practical-guide-to-github-actions-build-deploy-a-static-11ty-website-to-remote-virtual-server-after-push-d19)**.
 
