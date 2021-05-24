@@ -20,6 +20,9 @@ jobs:
         with:
           args: --output html
           install_dependencies: true
+          
+      - name: Install packages
+        run: echo "Sample Bash Command" 
 
       # Copying files and artifacts via SSH
       - name: Copying files to server
