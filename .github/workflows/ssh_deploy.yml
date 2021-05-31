@@ -16,7 +16,7 @@ jobs:
       - name: rsync deployments
         uses: midhlajvs/rsync-deployments@4.1
         with:
-          switches: -avzr --delete
+          switches: -avzru --delete --inplace
           path: src/
           remote_path: /var/www/html/test/
           remote_host: ${{ secrets.REMOTE_HOST }}
@@ -32,6 +32,6 @@ jobs:
           port: ${{ secrets.REMOTE_PORT }}
           script: |
             cd /var/www/html/biberna-staging/
-            bin/console theme:compile
-            bin/console cache:clear
+            sudo bin/console theme:compile
+            sudo bin/console cache:clear
 
