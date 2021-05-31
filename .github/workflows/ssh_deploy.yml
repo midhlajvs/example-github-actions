@@ -1,36 +1,24 @@
-name: Deploy Eleventy via SSH
+name: RSync Code Git
 
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE,
       # so your workflow can access it
-      - uses: actions/checkout@master
-
-      # Build your static website with Eleventy
-      - name: Build Eleventy
-        uses: TartanLlama/actions-eleventy@master
+      - uses: actions/checkout@v2
+            
+      #Rsync Deployment section 
+      - name: rsync deployments
+        uses: midhlajvs/rsync-deployments@4.1
         with:
-          args: --output html
-          install_dependencies: true
-          
-      - name: Install packages
-        run: echo "Sample Bash Command" 
-
-      # Copying files and artifacts via SSH
-      - name: Copying files to server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.REMOTE_HOST }}
-          username: ${{ secrets.REMOTE_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          rm: true
-          source: "html/"
-          target: "${{ secrets.REMOTE_DIR }}"
+          switches: -avzr --delete
+          path: src/
+          remote_path: /var/www/html/test/
+          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_user: ${{ secrets.REMOTE_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
